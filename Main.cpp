@@ -1,7 +1,10 @@
+#include "BTimer.hpp"
+
 #include <iostream>
 
 int main() {
-	std::cout << "Hello World!" << std::endl;
+	BTimer bTimer(true, "Test");
+	std::cout << bTimer.GetElapsedTimeAsInt("Test");
 
 	return 0;
 }

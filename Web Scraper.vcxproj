@@ -139,7 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BURLParser.cpp" />
+    <ClCompile Include="BWebScraper.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="BMiscellaneous.cpp" />
+    <ClCompile Include="BTimer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BURLParser.hpp" />
+    <ClInclude Include="BWebScraper.hpp" />
+    <ClInclude Include="BMiscellaneous.hpp" />
+    <ClInclude Include="BTimer.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
