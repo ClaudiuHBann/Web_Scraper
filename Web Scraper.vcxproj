@@ -139,14 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BURLParser.cpp" />
+    <ClCompile Include="BStringParser.cpp" />
     <ClCompile Include="BWebScraper.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="BMiscellaneous.cpp" />
     <ClCompile Include="BTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BURLParser.hpp" />
+    <ClInclude Include="BStringParser.hpp" />
     <ClInclude Include="BWebScraper.hpp" />
     <ClInclude Include="BMiscellaneous.hpp" />
     <ClInclude Include="BTimer.hpp" />

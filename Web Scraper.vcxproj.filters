@@ -21,7 +21,7 @@
     <ClCompile Include="BWebScraper.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="BURLParser.cpp">
+    <ClCompile Include="BStringParser.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="BMiscellaneous.cpp">
@@ -35,7 +35,7 @@
     <ClInclude Include="BWebScraper.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BURLParser.hpp">
+    <ClInclude Include="BStringParser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BMiscellaneous.hpp">
