@@ -1,25 +1,14 @@
 #include "BMiscellaneous.hpp"
 
-Miscellaneous::Miscellaneous() {
+BMiscellaneous::BMiscellaneous() {
 
 }
 
-Miscellaneous::~Miscellaneous() {
+BMiscellaneous::~BMiscellaneous() {
 
 }
 
-inline bool Miscellaneous::FileExists(const std::string& file) {
-	struct stat buffer;
-	return (stat(file.c_str(), &buffer) == 0);
-}
-
-inline std::string Miscellaneous::FileAsString(const std::string& file) {
-	std::string str("");
-	FileAsString(file, str);
-	return str;
-}
-
-inline void Miscellaneous::FileAsString(const std::string& file, std::string& str) {
+void BMiscellaneous::FileAsString(const std::string& file, std::string& str) {
 	if(!FileExists(file)) {
 		return;
 	}

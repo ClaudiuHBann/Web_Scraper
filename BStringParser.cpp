@@ -8,12 +8,6 @@ BStringParser::~BStringParser() {
 
 }
 
-inline std::vector<size_t> BStringParser::FindAllOccurrences(const std::string& data, const std::string& query) {
-	std::vector<size_t> occurancesPoss;
-	FindAllOccurrences(data, query, occurancesPoss);
-	return occurancesPoss;
-}
-
 void BStringParser::FindAllOccurrences(const std::string& data, const std::string& query, std::vector<size_t>& occurancesPoss) {
 	size_t pos = data.find(query);
 	while(pos != std::string::npos) {
@@ -74,12 +68,6 @@ std::string BStringParser::StringTrail(std::string data, const std::string& unti
 	return "";
 }
 
-inline std::string BStringParser::AttributeValue(const std::string& data, const std::string& attribute, const size_t offset/* = 0*/) {
-	std::string value("");
-	AttributeValue(data, attribute, value, offset);
-	return value;
-}
-
 void BStringParser::AttributeValue(const std::string& data, const std::string& attribute, std::string& dest, const size_t offset/* = 0*/) {
 	size_t valueLength = 0, posValueStart = offset + attribute.size() + 2;
 	for(size_t i = posValueStart; i < data.size(); i++) {
@@ -90,12 +78,6 @@ void BStringParser::AttributeValue(const std::string& data, const std::string& a
 	}
 
 	dest = data.substr(posValueStart, valueLength);
-}
-
-inline std::vector<std::string> BStringParser::Split(const std::string& data, const std::string& delimiter) {
-	std::vector<std::string> dest;
-	Split(data, delimiter, dest);
-	return dest;
 }
 
 void BStringParser::Split(const std::string& data, const std::string& delimiter, std::vector<std::string>& dest) {

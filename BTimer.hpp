@@ -11,15 +11,21 @@ public:
 	BTimer(const bool initTimer, const std::string& name = "");
 	~BTimer();
 
-	inline uint64_t Count();
+	inline uint64_t Count() {
+		return bTimersCount;
+	}
 
 	void Create(const std::string& name = "");
-	void Remove(const std::string& name);
+	inline void Remove(const std::string& name) {
+		bTimers.erase(name);
+	}
 
 	void Reset(const std::string& name);
-	
+
 	std::chrono::nanoseconds GetElapsedTime(const std::string& name);
-	int64_t GetElapsedTimeAsInt(const std::string& name);
+	inline int64_t GetElapsedTimeAsInt(const std::string& name) {
+		return GetElapsedTime(name).count();
+	}
 
 protected:
 	uint64_t bTimersCount = 0;

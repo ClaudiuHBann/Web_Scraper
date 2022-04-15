@@ -7,12 +7,19 @@
 
 #include <sys/stat.h>
 
-class Miscellaneous {
+class BMiscellaneous {
 public:
-	Miscellaneous();
-	~Miscellaneous();
+	BMiscellaneous();
+	~BMiscellaneous();
 
-	inline bool FileExists(const std::string& file);
-	inline std::string FileAsString(const std::string& file);
-	inline void FileAsString(const std::string& file, std::string &str);
+	inline bool FileExists(const std::string& file) {
+		struct stat buffer;
+		return (stat(file.c_str(), &buffer) == 0);
+	}
+	inline std::string FileAsString(const std::string& file) {
+		std::string str("");
+		FileAsString(file, str);
+		return str;
+	}
+	void FileAsString(const std::string& file, std::string& str);
 };

@@ -16,10 +16,6 @@ BTimer::~BTimer() {
 
 }
 
-inline uint64_t BTimer::Count() {
-	return bTimersCount;
-}
-
 void BTimer::Create(const std::string& name/* = ""*/) {
 	auto begin = std::chrono::steady_clock::now();
 	if(name.empty()) {
@@ -44,12 +40,4 @@ std::chrono::nanoseconds BTimer::GetElapsedTime(const std::string& name) {
 	}
 
 	return tp;
-}
-
-int64_t BTimer::GetElapsedTimeAsInt(const std::string& name) {
-	return GetElapsedTime(name).count();
-}
-
-void BTimer::Remove(const std::string& name) {
-	bTimers.erase(name);
 }
