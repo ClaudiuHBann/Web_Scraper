@@ -29,5 +29,6 @@ public:
 	BWebScraper();
 	~BWebScraper();
 
-	void URLToFile(const std::string& url, const std::string& file, const bool infoBasic = true, const bool infoExtended = false);
+	static void URLToFile(const std::string& url, const std::string& file, const bool infoBasic = true, const bool infoExtended = false);
+	static std::string URLToFileCache(const std::string& url, std::string& file, const bool infoBasic = true, const bool infoExtended = false, const bool asRef = false);
 };

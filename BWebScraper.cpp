@@ -9,7 +9,14 @@ DownloadProgress::~DownloadProgress() {
 }
 
 STDMETHODIMP_(HRESULT __stdcall) DownloadProgress::OnProgress(ULONG ulProgress, ULONG ulProgressMax, ULONG ulStatusCode, LPCWSTR wszStatusText) {
-	std::cout << "Downloaded " << ulProgress << " of " << ulProgressMax << " byte(s). Status Code = " << ulStatusCode << std::endl;
+	std::cout << "OnProgess: Downloaded " << ulProgress << " of " << ulProgressMax << " byte(s). Status: ";
+	if(wszStatusText) {
+		std::wcout << wszStatusText;
+	} else {
+		std::cout << '-';
+	}
+	std::cout << " (" << ulStatusCode << ')' << std::endl;
+
 	return S_OK;
 }
 
@@ -26,7 +33,15 @@ STDMETHODIMP_(HRESULT __stdcall) DownloadProgress::OnLowResource(DWORD reserved)
 }
 
 STDMETHODIMP_(HRESULT __stdcall) DownloadProgress::OnStopBinding(HRESULT hresult, LPCWSTR szError) {
-	return E_NOTIMPL;
+	std::cout << "OnStopBinding: Status: ";
+	if(szError) {
+		std::wcout << szError;
+	} else {
+		std::cout << '-';
+	}
+	std::cout << " (" << hresult << ')' << std::endl;
+
+	return S_OK;
 }
 
 STDMETHODIMP_(HRESULT __stdcall) DownloadProgress::GetBindInfo(DWORD __RPC_FAR* grfBINDF, BINDINFO __RPC_FAR* pbindinfo) {
@@ -88,4 +103,43 @@ void BWebScraper::URLToFile(const std::string& url, const std::string& file, con
 			std::cout << "Other error: " << hResult << '.' << std::endl;
 			break;
 	}
+}
+
+std::string BWebScraper::URLToFileCache(const std::string& url, std::string& file, const bool infoBasic/* = true*/, const bool infoExtended/* = false*/, const bool asRef/* = false*/) {
+	std::string toReturn("");
+	wchar_t buffer[MAX_PATH];
+
+	HRESULT hResult;
+	if(infoExtended) {
+		DownloadProgress dp;
+		hResult = URLDownloadToCacheFile(nullptr, std::wstring(url.begin(), url.end()).c_str(), buffer, MAX_PATH, 0, (IBindStatusCallback*)&dp);
+	} else {
+		hResult = URLDownloadToCacheFile(nullptr, std::wstring(url.begin(), url.end()).c_str(), buffer, MAX_PATH, 0, nullptr);
+	}
+
+	std::wstring ws(buffer);
+	if(asRef) {
+		file.assign(ws.begin(), ws.end());
+	} else {
+		toReturn.assign(ws.begin(), ws.end());
+	}
+
+	if(infoBasic) {
+		switch(hResult) {
+			case S_OK:
+				std::cout << url << " has been downloaded to " << file << '.' << std::endl;
+				break;
+			case E_OUTOFMEMORY:
+				std::cout << "Buffer length invalid, or insufficient memory!" << std::endl;
+				break;
+			case INET_E_DOWNLOAD_FAILURE:
+				std::cout << url << " is invalid!" << std::endl;
+				break;
+			default:
+				std::cout << "Other error: " << hResult << '.' << std::endl;
+				break;
+		}
+	}
+
+	return toReturn;
 }
