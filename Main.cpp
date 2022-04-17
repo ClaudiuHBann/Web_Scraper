@@ -28,7 +28,7 @@ void PHThread(const size_t page, char** argv) {
 	std::string pathGifs(pathBase + "\\gifs" + std::to_string(page) + ".html");
 	std::cout << "Path: " << pathGifs << std::endl << std::endl;
 
-	BWebScraper::URLToFile(url, pathGifs, true, true);
+	BWebScraper::URLToFile(url, pathGifs, true);
 	std::cout << std::endl;
 
 	std::string attribute("data-gif-url");
@@ -49,7 +49,7 @@ void PHThread(const size_t page, char** argv) {
 		std::string gifPath(pathBase + "\\" + std::to_string(page) + std::to_string(i) + bsp.StringTrail(gifsUrls[i], ".", true));
 		if(!BMiscellaneous::FileExists(gifPath)) {
 			as.push_back(std::async(std::launch::async, [i, gifsUrls, gifPath] {
-				BWebScraper::URLToFile(gifsUrls[i], gifPath, true, true);
+				BWebScraper::URLToFile(gifsUrls[i], gifPath, true);
 				gifsCurrent++;
 			}));
 		}
@@ -76,8 +76,9 @@ int main(int argc, char** argv) {
 }
 
 /*
-	webscraper with async methods and multithreads support
 	if UNICODE ?
+
+	solve the warnings and infos
 
 	BUGS:
 		the blocking shit problem (after some requests the urldownloadtofile blocks)

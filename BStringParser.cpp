@@ -57,7 +57,7 @@ std::string BStringParser::RemoveStringTrail(std::string& data, const std::strin
 	return "";
 }
 
-std::string BStringParser::StringTrail(std::string data, const std::string& until, const bool inclusive/* = false*/) {
+std::string BStringParser::StringTrail(const std::string data, const std::string& until, const bool inclusive/* = false*/) {
 	if(until.size() <= data.size()) {
 		size_t pos = data.rfind(until);
 		if(pos != std::string::npos) {

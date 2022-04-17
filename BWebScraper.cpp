@@ -80,9 +80,9 @@ void BWebScraper::URLToFile(const std::string& url, const std::string& file, con
 	HRESULT hResult;
 	if(infoExtended) {
 		DownloadProgress dp;
-		hResult = URLDownloadToFile(nullptr, std::wstring(url.begin(), url.end()).c_str(), std::wstring(file.begin(), file.end()).c_str(), 0, (IBindStatusCallback*)&dp);
+		hResult = URLDownloadToFile(nullptr, url.c_str(), file.c_str(), 0, (IBindStatusCallback*)&dp);
 	} else {
-		hResult = URLDownloadToFile(nullptr, std::wstring(url.begin(), url.end()).c_str(), std::wstring(file.begin(), file.end()).c_str(), 0, nullptr);
+		hResult = URLDownloadToFile(nullptr, url.c_str(), file.c_str(), 0, nullptr);
 	}
 
 	if(!infoBasic) {
@@ -107,21 +107,20 @@ void BWebScraper::URLToFile(const std::string& url, const std::string& file, con
 
 std::string BWebScraper::URLToFileCache(const std::string& url, std::string& file, const bool infoBasic/* = true*/, const bool infoExtended/* = false*/, const bool asRef/* = false*/) {
 	std::string toReturn("");
-	wchar_t buffer[MAX_PATH];
+	char buffer[MAX_PATH];
 
 	HRESULT hResult;
 	if(infoExtended) {
 		DownloadProgress dp;
-		hResult = URLDownloadToCacheFile(nullptr, std::wstring(url.begin(), url.end()).c_str(), buffer, MAX_PATH, 0, (IBindStatusCallback*)&dp);
+		hResult = URLDownloadToCacheFile(nullptr, url.c_str(), buffer, MAX_PATH, 0, (IBindStatusCallback*)&dp);
 	} else {
-		hResult = URLDownloadToCacheFile(nullptr, std::wstring(url.begin(), url.end()).c_str(), buffer, MAX_PATH, 0, nullptr);
+		hResult = URLDownloadToCacheFile(nullptr, url.c_str(), buffer, MAX_PATH, 0, nullptr);
 	}
 
-	std::wstring ws(buffer);
 	if(asRef) {
-		file.assign(ws.begin(), ws.end());
+		file.assign(buffer);
 	} else {
-		toReturn.assign(ws.begin(), ws.end());
+		toReturn.assign(buffer);
 	}
 
 	if(infoBasic) {
@@ -142,4 +141,16 @@ std::string BWebScraper::URLToFileCache(const std::string& url, std::string& fil
 	}
 
 	return toReturn;
+}
+
+std::future<void> BWebScraper::URLToFileAsync(const std::string& url, const std::string& file, const bool infoBasic/* = true*/, const bool infoExtended/* = false*/) {
+	return std::async(std::launch::async, [url, file, infoBasic, infoExtended] {
+		URLToFile(url, file, infoBasic, infoExtended);
+	});
+}
+
+std::future<std::string> BWebScraper::URLToFileCacheAsync(const std::string& url, std::string& file, const bool infoBasic/* = true*/, const bool infoExtended/* = false*/, const bool asRef/* = false*/) {
+	return std::async(std::launch::async, [url, &file, infoBasic, infoExtended, asRef] {
+		return URLToFileCache(url, file, infoBasic, infoExtended, asRef);
+	});
 }
