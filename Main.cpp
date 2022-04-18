@@ -119,7 +119,7 @@ int main(int argc, char** argv) {
 		auto t = BWebScraper::URLToAttributeValues("https://www.pornhub.com/albums/female-misc-straight?o=mv&verified=1&t=a&page=" + std::to_string(page), "href", false);
 		for(auto item : t) {
 			// Filter the albums from the page
-			if(item.find("/album/") != std::string::npos) {
+			if(BStringParser::Contains(item, "/album/")) {
 				// The thread :O
 				std::thread([item, argv] { PHThread(item, argv); }).detach();
 			}
