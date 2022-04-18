@@ -28,7 +28,7 @@ std::string BStringParser::RemoveStringLead(std::string& data, const std::string
 		}
 	}
 
-	return "";
+	return data;
 }
 
 std::string BStringParser::StringLead(const std::string& data, const std::string& until, const bool inclusive/* = false*/) {
@@ -54,7 +54,7 @@ std::string BStringParser::RemoveStringTrail(std::string& data, const std::strin
 		}
 	}
 
-	return "";
+	return data;
 }
 
 std::string BStringParser::StringTrail(const std::string data, const std::string& until, const bool inclusive/* = false*/) {
@@ -66,6 +66,17 @@ std::string BStringParser::StringTrail(const std::string data, const std::string
 	}
 
 	return "";
+}
+
+std::string BStringParser::RemoveStringTrail(const std::string& data, const std::string& until, const bool inclusive/* = false*/) {
+	if(until.size() <= data.size()) {
+		size_t pos = data.rfind(until);
+		if(pos != std::string::npos) {
+			return data.substr(0, pos + ((inclusive) ? 0 : until.size()));
+		}
+	}
+
+	return data;
 }
 
 void BStringParser::AttributeValue(const std::string& data, const std::string& attribute, std::string& dest, const size_t offset/* = 0*/) {

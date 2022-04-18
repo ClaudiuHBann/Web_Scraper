@@ -17,7 +17,7 @@ BTimer::~BTimer() {
 }
 
 void BTimer::Create(const std::string& name/* = ""*/) {
-	auto begin = std::chrono::steady_clock::now();
+	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 	if(name.empty()) {
 		bTimers[std::to_string(++bTimersCount)] = begin;
 	} else {

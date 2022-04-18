@@ -19,7 +19,7 @@ public:
 	 *
 	 * @return the positions of the occurrences as a vector
 	 */
-	inline std::vector<size_t> FindAllOccurrences(const std::string& data, const std::string& query) {
+	static inline std::vector<size_t> FindAllOccurrences(const std::string& data, const std::string& query) {
 		std::vector<size_t> occurancesPoss;
 		FindAllOccurrences(data, query, occurancesPoss);
 		return occurancesPoss;
@@ -32,7 +32,7 @@ public:
 	 * @param[in] the query to be searched for
 	 * @param[out] the vector with the positions
 	 */
-	void FindAllOccurrences(const std::string& data, const std::string& query, std::vector<size_t>& occurancesPoss);
+	static void FindAllOccurrences(const std::string& data, const std::string& query, std::vector<size_t>& occurancesPoss);
 
 	/**
 	 * Removes the lead part of the "data" until "until" and the "until" too if is inclusive,
@@ -45,7 +45,7 @@ public:
 	 *
 	 * @return the new string if "useCopy" is true
 	 */
-	std::string RemoveStringLead(std::string& data, const std::string& until, const bool inclusive = false, const bool useCopy = true);
+	static std::string RemoveStringLead(std::string& data, const std::string& until, const bool inclusive = false, const bool useCopy = true);
 
 	/**
 	 * Returns the lead string until "until" and the "until" too if inclusive
@@ -56,7 +56,7 @@ public:
 	 *
 	 * @return the string lead
 	 */
-	std::string StringLead(const std::string& data, const std::string& until, const bool inclusive = false);
+	static std::string StringLead(const std::string& data, const std::string& until, const bool inclusive = false);
 
 	/**
 	 * Removes the trail part of the "data" until "until" and the "until" too if is inclusive,
@@ -69,7 +69,19 @@ public:
 	 *
 	 * @return the new string if "useCopy" is true
 	 */
-	std::string RemoveStringTrail(std::string& data, const std::string& until, const bool inclusive = false, const bool useCopy = true);
+	static std::string RemoveStringTrail(std::string& data, const std::string& until, const bool inclusive = false, const bool useCopy = true);
+
+	/**
+	 * Removes the trail part of the "data" until "until" and the "until" too if is inclusive,
+	 *	after which returns the new string
+	 *
+	 * @param[in] the data to be changed for the upcoming operations
+	 * @param[in] the string until to be removed from "data"
+	 * @param[in] remove "until" too or not
+	 *
+	 * @return the new string after removal
+	 */
+	static std::string RemoveStringTrail(const std::string& data, const std::string& until, const bool inclusive = false);
 
 	/**
 	 * Returns the trail string until "until" and the "until" too if inclusive
@@ -80,7 +92,7 @@ public:
 	 *
 	 * @return the string lead
 	 */
-	std::string StringTrail(const std::string data, const std::string& until, const bool inclusive = false);
+	static std::string StringTrail(const std::string data, const std::string& until, const bool inclusive = false);
 
 	/**
 	 * Returns the value of the specified attribute by the "data" and it's "offset"
@@ -91,7 +103,7 @@ public:
 	 *
 	 * @return the value of the attribute
 	 */
-	inline std::string AttributeValue(const std::string& data, const std::string& attribute, const size_t offset = 0) {
+	static inline std::string AttributeValue(const std::string& data, const std::string& attribute, const size_t offset = 0) {
 		std::string value("");
 		AttributeValue(data, attribute, value, offset);
 		return value;
@@ -105,7 +117,7 @@ public:
 	 * @param[in] the destination for the value
 	 * @param[in] the offset of "data" where "attribute" is located
 	 */
-	void AttributeValue(const std::string& data, const std::string& attribute, std::string& dest, const size_t offset = 0);
+	static void AttributeValue(const std::string& data, const std::string& attribute, std::string& dest, const size_t offset = 0);
 
 	/**
 	 * Splits the "data" by the "delimiter" into a vector of strings
@@ -115,7 +127,7 @@ public:
 	 *
 	 * @return a vector with the splitted strings
 	 */
-	inline std::vector<std::string> Split(const std::string& data, const std::string& delimiter) {
+	static inline std::vector<std::string> Split(const std::string& data, const std::string& delimiter) {
 		std::vector<std::string> dest;
 		Split(data, delimiter, dest);
 		return dest;
@@ -128,5 +140,5 @@ public:
 	 * @param[in] the delimiter idk :O
 	 * @param[out] the vector to be populated with the splitted strings
 	 */
-	void Split(const std::string& data, const std::string& delimiter, std::vector<std::string>& dest); // I have a bad feeling about this :(
+	static void Split(const std::string& data, const std::string& delimiter, std::vector<std::string>& dest); // I have a bad feeling about this :(
 };
