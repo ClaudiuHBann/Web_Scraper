@@ -1,4 +1,4 @@
-##A simple and basic Web Scraper done in C++ with Win32 APIs.
+## A simple and basic Web Scraper done in C++ with Win32 APIs.
 
 **Example on how to download all the gifs from the first 69 [PH](https://www.pornhub.com/gifs?o=mv&t=a&page=1) pages (*On a test I downloaded 2100+ gifs in 1.9 minutes (webms of 5.8GB)*):**
 ```c++
