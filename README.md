@@ -1,6 +1,6 @@
-# A simple and basic Web Scraper done in C++ with Win32 APIs.
+## A simple and basic Web Scraper done in C++ with Win32 APIs.
 
-## Example I
+### Example I
 **Example on how to download all the gifs from the first 69 [PH](https://www.pornhub.com/gifs?o=mv&t=a&page=1) pages (*On a test I downloaded 2100+ gifs in 1.9 minutes (webms of 5.8GB)*):**
 ```c++
 #include "BMiscellaneous.hpp"
@@ -67,7 +67,7 @@ int main(int argc, char** argv) {
 }
 ```
 
-## Example II
+### Example II
 **Example on how to download all the photos from all the albums for the first 10 pages from [PH](https://www.pornhub.com/albums/female-misc-straight?o=mv&verified=1&t=a&page=1) pages (*On a test I downloaded 13.000+ photos in 9.5 minutes (jpgs of 161MB)*):**
 ```c++
 #include "BMiscellaneous.hpp"
