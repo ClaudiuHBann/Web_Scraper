@@ -120,6 +120,18 @@ public:
 	static void AttributeValue(const std::string& data, const std::string& attribute, std::string& dest, const size_t offset = 0);
 
 	/**
+	 * Checks if a string contains another string
+	 *
+	 * @param[in] the data which we are searching
+	 * @param[in] the query to be searched in "data"
+	 * 
+	 * @return true if "data" contains "query" else false
+	 */
+	static inline bool Contains(const std::string& data, const std::string query) {
+		return data.find(query) != std::string::npos;
+	}
+
+	/**
 	 * Splits the "data" by the "delimiter" into a vector of strings
 	 *
 	 * @param[in] the data to be splitted
