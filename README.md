@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
 	return 0;
 }
 ```
-<br/>
+
 **Example on how to download all the photos from all the albums for the first 10 pages from [PH](https://www.pornhub.com/albums/female-misc-straight?o=mv&verified=1&t=a&page=1) pages (*On a test I downloaded 13.000+ photos in 9.5 minutes (jpgs of 161MB)*):**
 ```c++
 #include "BMiscellaneous.hpp"
