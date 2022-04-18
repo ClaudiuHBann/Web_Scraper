@@ -16,6 +16,9 @@
 #include <Urlmon.h>
 #pragma comment(lib, "urlmon.lib")
 
+#include "BMiscellaneous.hpp"
+#include "BStringParser.hpp"
+
 /**
  * Implementation of a bind status callback for URLDownloadTo(Cache)File
  *
@@ -99,4 +102,31 @@ public:
 	 * @return the result of the async operation (the path of the cached file) if "asRef" is false
 	 */
 	static std::future<std::string> URLToFileCacheAsync(const std::string& url, std::string& file, const bool infoBasic = true, const bool infoExtended = false, const bool asRef = false);
+
+	/**
+	 * Downloads data from "url" and saves it to cache
+	 *	with basic and/or extended info when downloading,
+	 *	after which populates a vector with the attribute values and returns it
+	 *
+	 * @param[in] website's url
+	 * @param[in] the attribute of which we take the values
+	 * @param[in] basic info about downloading
+	 * @param[in] extended info about downloading
+	 * 
+	 * @return the vector with the attribute values
+	 */
+	static std::vector<std::string> URLToAttributeValues(const std::string& url, const std::string& attribute, const bool infoBasic = true, const bool infoExtended = false);
+	
+	/**
+	 * Downloads data from "url" and saves it to cache
+	 *	with basic and/or extended info when downloading,
+	 *	after which it populates "values" with the values of "attribute"
+	 *
+	 * @param[in] website's url
+	 * @param[in] the attribute of which we take the values
+	 * @param[out] vector to be populated with the values
+	 * @param[in] basic info about downloading
+	 * @param[in] extended info about downloading
+	 */
+	static void URLToAttributeValues(const std::string& url, const std::string& attribute, std::vector<std::string>& values, const bool infoBasic = true, const bool infoExtended = false);
 };

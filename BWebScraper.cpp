@@ -154,3 +154,21 @@ std::future<std::string> BWebScraper::URLToFileCacheAsync(const std::string& url
 		return URLToFileCache(url, file, infoBasic, infoExtended, asRef);
 	});
 }
+
+std::vector<std::string> BWebScraper::URLToAttributeValues(const std::string& url, const std::string& attribute, const bool infoBasic/* = true*/, const bool infoExtended/* = false*/) {
+	std::vector<std::string> values;
+	URLToAttributeValues(url, attribute, values, infoBasic, infoExtended);
+	return values;
+}
+
+void BWebScraper::URLToAttributeValues(const std::string& url, const std::string& attribute, std::vector<std::string>& values, const bool infoBasic/* = true*/, const bool infoExtended/* = false*/) {
+	std::string path;
+	URLToFileCache(url, path, infoBasic, infoExtended, true);
+
+	BStringParser bsp;
+	std::string gifsAsString = BMiscellaneous::FileAsString(path);
+	std::vector<size_t> gifsDataWebms = bsp.FindAllOccurrences(gifsAsString, attribute);
+	for(size_t i = 0; i < gifsDataWebms.size(); i++) {
+		values.push_back(bsp.AttributeValue(gifsAsString, attribute, gifsDataWebms[i]));
+	}
+}
