@@ -96,6 +96,7 @@ void BStringParser::Split(const std::string& data, const std::string& delimiter,
 	FindAllOccurrences(data, delimiter, occurrences);
 
 	if(occurrences.empty()) {
+		dest.push_back(data);
 		return;
 	}
 
